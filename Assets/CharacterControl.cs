@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterControl : MonoBehaviour
 {
+    // 2022-06-04 ??? ??
     private new Rigidbody2D rigidbody;
     private BoxCollider2D boxCollider;
     private Animator animator;
@@ -45,24 +46,12 @@ public class CharacterControl : MonoBehaviour
     void Update()
     {
         GroundAndWall();
-        //WallCheck();
-        //GroundCheck();
-
-        // DrawRay
-        //Debug.DrawRay(lowerBoxCollider.bounds.center + new Vector3(lowerBoxCollider.bounds.extents.x, 0), Vector2.down * (lowerBoxCollider.bounds.extents.y), rayColor);
-        //Debug.DrawRay(lowerBoxCollider.bounds.center - new Vector3(lowerBoxCollider.bounds.extents.x, lowerBoxCollider.bounds.extents.y), Vector2.right * (lowerBoxCollider.bounds.extents.x) * 2, rayColor);
-
         // Input
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
         HorizontalMove(Input.GetAxis("Horizontal"));
-        //if (Input.GetAxis("Horizontal") != 0)
-        //{
-        //    rigidbody.velocity = new Vector2(((Input.GetAxis("Horizontal") > 0.0f) ? 1.0f : -1.0f) * speed, rigidbody.velocity.y);
-        //}
-
         RunningCheck();
     }
 
@@ -73,49 +62,10 @@ public class CharacterControl : MonoBehaviour
             value * speed,
             rigidbody.velocity.y
             );
-        //if (value < 0)
-        //{
-        //    rigidbody.velocity = new Vector2(
-        //        (Mathf.Abs(rigidbody.velocity.x) < 0.01f) ?
-        //        -2f :
-        //        Mathf.Max(rigidbody.velocity.x - acc * dt, -speed),
-        //        rigidbody.velocity.y
-        //        );
-        //}
-        //else if (value > 0)
-        //{
-        //    rigidbody.velocity = new Vector2(
-        //        (Mathf.Abs(rigidbody.velocity.x) < 0.01f) ?
-        //        2f :
-        //        Mathf.Min(rigidbody.velocity.x + acc * dt, speed),
-        //        rigidbody.velocity.y
-        //        );
-        //}
-        //else
-        //{
-        //    rigidbody.velocity = new Vector2(
-        //        (Mathf.Abs(rigidbody.velocity.x) < 0.01f) ? 0 : (rigidbody.velocity.x + ((rigidbody.velocity.x > 0) ? -1 : 1) * acc * dt),
-        //        rigidbody.velocity.y
-        //        );
-        //}
     }
 
     private void RunningCheck()
     {
-        //if (rigidbody.velocity.x > 0.01f)
-        //{
-        //    animator.SetBool("isRunning", true);
-        //    spriteRenderer.flipX = false;
-        //}
-        //else if (rigidbody.velocity.x < -0.01f)
-        //{
-        //    animator.SetBool("isRunning", true);
-        //    spriteRenderer.flipX = true;
-        //}
-        //else
-        //{
-        //    animator.SetBool("isRunning", false);
-        //}
         if (rigidbody.velocity.x > 0.0f)
         {
             animator.SetBool("isRunning", true);
@@ -153,7 +103,6 @@ public class CharacterControl : MonoBehaviour
         RaycastHit2D raycastHit2D = Physics2D.BoxCast(lowerBoxCollider.bounds.center, lowerBoxCollider.bounds.size, 0f, Vector2.down, groundLength, platformLayerMask);
         if (raycastHit2D.collider != null)
         {
-            // 점프 후 바로 다음 프레임에 raycastHit 으로 jumpCount 초기화
             if (rigidbody.velocity.y < 0 && isFalling)
             {
                 print("land");
@@ -166,7 +115,6 @@ public class CharacterControl : MonoBehaviour
         }
         else
         {
-            // 떨어지는 중 이단점프 시 바로 isFalling 으로 이단점프 애니메이션 스킵
             if (rigidbody.velocity.y < 0f && !onWall)
             {
                 isFalling = true;
@@ -216,7 +164,6 @@ public class CharacterControl : MonoBehaviour
         else
         {
             onWall = false;
-
         }
 
         if(groundHit2D.collider != null)

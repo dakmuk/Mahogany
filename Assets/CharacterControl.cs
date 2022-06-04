@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterControl : MonoBehaviour
 {
-    // 2022-06-04 ??? ??
+    // 2022-06-04 테스트
     private new Rigidbody2D rigidbody;
     private BoxCollider2D boxCollider;
     private Animator animator;

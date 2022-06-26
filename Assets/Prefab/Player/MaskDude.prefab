@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8635366847100680111}
   - component: {fileID: 4800234381518363226}
+  - component: {fileID: 4435176070198315458}
   m_Layer: 0
   m_Name: RightSideEdge
   m_TagString: Untagged
@@ -41,7 +42,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.2, y: -0.1}
@@ -57,6 +58,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.65}
   m_EdgeRadius: 0
+--- !u!114 &4435176070198315458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612227425767305034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d6aac3d3994cc0448e95b950b8fb924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterControl: {fileID: 4677421993408592020}
+  animationManager: {fileID: 1756334689482602568}
+  animator: {fileID: 4677421993408592017}
 --- !u!1 &1149497717768357608
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,6 +83,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1650830698654389565}
   - component: {fileID: 5346363574031662468}
+  - component: {fileID: 5325386684752669639}
   m_Layer: 0
   m_Name: LowerEdge
   m_TagString: Untagged
@@ -98,7 +115,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.45}
@@ -114,6 +131,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.1}
   m_EdgeRadius: 0
+--- !u!114 &5325386684752669639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149497717768357608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6829bbc5aeda5b745b2c28a7992e4135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterControl: {fileID: 4677421993408592020}
+  animator: {fileID: 4677421993408592017}
 --- !u!1 &3558581648823249008
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2423744079942305239}
   - component: {fileID: 744497718162035560}
+  - component: {fileID: 7690841516484775792}
   m_Layer: 0
   m_Name: LeftSideEdge
   m_TagString: Untagged
@@ -155,7 +187,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.2, y: -0.1}
@@ -171,6 +203,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.65}
   m_EdgeRadius: 0
+--- !u!114 &7690841516484775792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558581648823249008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d6aac3d3994cc0448e95b950b8fb924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterControl: {fileID: 4677421993408592020}
+  animationManager: {fileID: 1756334689482602568}
+  animator: {fileID: 4677421993408592017}
 --- !u!1 &4677421993408592018
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,6 +406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66cf47ec247513b49b254f441d5f4ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acc: 0
+  breakAcc: 0
   jumpCount: 0
 --- !u!114 &1756334689482602568
 MonoBehaviour:

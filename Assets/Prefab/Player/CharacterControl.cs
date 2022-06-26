@@ -15,9 +15,9 @@ public class CharacterControl : MonoBehaviour
     private void Start()
     {
         jumpCount = 0;
-        acc = 40f;
-        breakAcc = 40f;
-        speed = 5f;
+        acc = 20f;
+        breakAcc = 30f;
+        speed = 3f;
         jumpForce = 10f;
         rigidbody = GetComponent<Rigidbody2D>();
         animationManager = GetComponent<AnimationManager>();
@@ -82,8 +82,9 @@ public class CharacterControl : MonoBehaviour
             case 0:
                 if (animationManager.onWall)
                 {
+                    animationManager.onWall = false;
                     jumpCount++;
-                    rigidbody.velocity = new Vector2(15.0f, jumpForce);
+                    rigidbody.velocity = new Vector2(3.0f, jumpForce);
                     animationManager.animator.SetTrigger("jump");
                 }
                 else

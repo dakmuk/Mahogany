@@ -24,7 +24,7 @@ public class AnimationManager : MonoBehaviour
     {
         onGround = false;
         onWall = false;
-        groundCheckLength = 0.4f;
+        groundCheckLength = 0.2f;
         wallCheckLength = 0.1f;
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -34,32 +34,37 @@ public class AnimationManager : MonoBehaviour
     }
     private void Update()
     {
-        GroundAndWall();
-        CheckFall();
-        CheckRun();
-    }
-    private void CheckFall()
-    {
-        if(( !onWall || !onGround ) && rigidbody.velocity.y < 0)
+        if (!CheckFall())
         {
-            isFalling = true;
-            animator.SetBool("isFalling", true);
+            CheckRun();
+            CheckGround();
+        }
+        CheckWall();
+    }
+    private bool CheckFall()
+    {
+        if(( !onWall || !onGround ) && rigidbody.velocity.y < -0.1f)
+        {
+            if(!isFalling)
+            {
+                isFalling = true;
+                animator.SetTrigger("fall");
+            }
         }
         else
         {
             isFalling = false;
-            animator.SetBool("isFalling", false);
         }
+        return isFalling;
     }
-
     private void CheckRun()
     {
-        if (rigidbody.velocity.x > 0.0f)
+        if (rigidbody.velocity.x > 0.1f)
         {
             animator.SetBool("isRunning", true);
             spriteRenderer.flipX = false;
         }
-        else if (rigidbody.velocity.x < -0.0f)
+        else if (rigidbody.velocity.x < -0.1f)
         {
             animator.SetBool("isRunning", true);
             spriteRenderer.flipX = true;
@@ -69,43 +74,24 @@ public class AnimationManager : MonoBehaviour
             animator.SetBool("isRunning", false);
         }
     }
-    private void GroundAndWall()
+    private bool CheckGround()
     {
         RaycastHit2D groundHit2D = Physics2D.BoxCast(lowerBoxCollider.bounds.center, lowerBoxCollider.bounds.size, 0f, Vector2.down, groundCheckLength, platformLayerMask);
-        RaycastHit2D leftWallHit2D = Physics2D.BoxCast(leftSideBoxCollider.bounds.center, leftSideBoxCollider.bounds.size, 0f, Vector2.left, wallCheckLength, platformLayerMask);
-        RaycastHit2D rightWallHit2D = Physics2D.BoxCast(rightSideBoxCollider.bounds.center, rightSideBoxCollider.bounds.size, 0f, Vector2.right, wallCheckLength, platformLayerMask);
-
-        if((leftWallHit2D.collider != null || rightWallHit2D.collider != null ) && groundHit2D.collider == null)
-        {
-            onWall = true;
-            if(rightWallHit2D.collider != null && rigidbody.velocity.x > 0)
-            {
-                animator.SetTrigger("wall");
-                characterControl.jumpCount = 0;
-            }
-            else if(leftWallHit2D.collider != null && rigidbody.velocity.x < 0)
-            {
-                animator.SetTrigger("wall");
-                characterControl.jumpCount = 0;
-            }
-        }
-        else
-        {
-            onWall = false;
-        }
-
         if(groundHit2D.collider != null)
         {
             onGround = true;
-            if(rigidbody.velocity.y < 0)
-            {
-                animator.SetTrigger("land");
-                characterControl.jumpCount = 0;
-            }
         }
         else
         {
             onGround = false;
+        }
+        return onGround;
+    }
+    private void CheckWall()
+    {
+        if (onWall)
+        {
+            rigidbody.velocity = new Vector2( rigidbody.velocity.x, -1.0f );
         }
     }
 }
